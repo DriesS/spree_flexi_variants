@@ -85,7 +85,7 @@
     var configuration_price=0;
 
     // for selects or checkboxes
-    $("select.ad-hoc-option-select, input:checked.ad-hoc-option-select").each(function() {
+    $("select.ad-hoc-option-select, input:checked.ad-hoc-option-type").each(function() {
       // the :prompt=>'None' in the select tag yields an empty string, which I can't use in the price calcuation
       var val=$(this).val();
 

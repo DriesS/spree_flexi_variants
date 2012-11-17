@@ -8,11 +8,11 @@ function legalCombination(triggering_select, triggering_value, current_target, t
     var cur_opt_arr = [];
     all_vals[$(this).attr('id')] = cur_opt_arr;
 
-    if ($(this).find(":input:checked").val() != "") {
+    if ($(this).find(":input:checked").val() !== "") {
       cur_opt_arr.push($(this).find(":input:checked").val());
     } else {
       var opts=$(this).data('options');
-      $.each(opts, function(i, opt) { if (opt.value != "") {cur_opt_arr.push(opt.value);} });
+      $.each(opts, function(i, opt) { if (opt.value !== "") {cur_opt_arr.push(opt.value);} });
     }
   });
 
@@ -30,7 +30,7 @@ function legalCombination(triggering_select, triggering_value, current_target, t
 
   var has_legal_possibility=false;
 
-  if (possibilities.length==0) {
+  if(possibilities.length === 0){
 
     var found_violation = false;
 
@@ -39,7 +39,7 @@ function legalCombination(triggering_select, triggering_value, current_target, t
       if ((exclusion[$(triggering_select).attr('id')] == triggering_value || exclusion[$(triggering_select).attr('id')] == "*") && (
         exclusion[$(current_target).attr('id')] == target_option.value || exclusion[$(current_target).attr('id')] == "*")) {
         found_violation=true;
-        return false; 
+        return false;
       }
     }); // each
 
@@ -52,9 +52,6 @@ function legalCombination(triggering_select, triggering_value, current_target, t
       var found_violation = false;
 
       $.each(exclusions, function(j, exclusion) {
-
-        var test = exclusion[$(triggering_select).attr('id')];
-        test;
 
         if ((exclusion[$(triggering_select).attr('id')] == triggering_value || exclusion[$(triggering_select).attr('id')] == "*") && (
           exclusion[$(current_target).attr('id')] == target_option.value || exclusion[$(current_target).attr('id')] == "*")) {
@@ -89,7 +86,7 @@ function possibleCombinations (options) {
   var recursiveSearch;
   var possibilities = [];
 
-  if (options.length == 0) {
+  if (options.length === 0) {
     return possibilities;
   }
 
@@ -102,14 +99,14 @@ function possibleCombinations (options) {
       // is there one more layer?
       if ( depth +1 < options.length ) {
         // yes: iterate the layer
-        var a=new Array();
+        var a = [];
         $.merge(a,arr);
         a.push(options[depth][i]);
         recursiveSearch ( a , depth +1 );
       }
       else {
         // no: this is the last layer. we add the result to the array
-        var a=new Array();
+        var a = [];
         $.merge(a,arr);
         a.push(options[depth][i]);
         possibilities.push ( a);
@@ -132,20 +129,20 @@ $(document).ready(function() {
 
     // find the current options, and save them in the 'data' of the select
 
-    $(select).find('input').each(function() { 
-      var text_value = $(this).siblings('.variant-description').text()
+    $(select).find('input').each(function() {
+      var text_value = $(this).siblings('.variant-description').text();
       var price_value = $(this).siblings('.price').text();
       options.push({value: $(this).val(), text: text_value, price: price_value});
     });
 
     $(select).data('options', options);
-  })
+  });
 
   // set up the change event handler when any drop down changes,
 
   $('.ad_hoc input').live('change', function() {
     var triggering_value = $(this).val();
-    var triggering_select = $(this).parents('.ad_hoc:first')
+    var triggering_select = $(this).parents('.ad_hoc:first');
 
     // alter the contents of every other drop down
     $('.ad_hoc').not(triggering_select).each(function(i) {
@@ -159,33 +156,33 @@ $(document).ready(function() {
       $.each(target_options, function(i) {
         var target_option = target_options[i];                  // e.g. s_2_0
 
-        if (target_option.value=="") {
+        if(target_option.value === ""){
           var value = target_option.value;
-          var id = $(current_target).attr("id") + '__' + value
-          var name = $(current_target).data("form-name") + "[]"
-          
+          var id = $(current_target).attr("id") + '__' + value;
+          var name = $(current_target).data("form-name") + "[]";
+
           $(current_target).append(
             $("<li><label><input type='radio' class='ad-hoc-option-type' id="+id+" name="+name+" value="+value+"><span class='variant-description'> "+target_option.text+"</span><span class='price diff'> "+target_option.price+"</span></label></li>")
           );
         } else {
           if (legalCombination(triggering_select, triggering_value, current_target, target_option)) {
-            var value = target_option.value;
-            var id = $(current_target).attr("id") + '__' + value
-            var name = $(current_target).data("form-name") + "[]"
-            
+            var target_value = target_option.value;
+            var target_id = $(current_target).attr("id") + '__' + target_value;
+            var target_name = $(current_target).data("form-name") + "[]";
+
             $(current_target).append(
-              $("<li><label><input type='radio' class='ad-hoc-option-type' id="+id+" name="+name+" value="+value+"><span class='variant-description'> "+target_option.text+"</span><span class='price diff'> "+target_option.price+"</span></label></li>")
+              $("<li><label><input type='radio' class='ad-hoc-option-type' id="+target_id+" name="+target_name+" value="+target_value+"><span class='variant-description'> "+target_option.text+"</span><span class='price diff'> "+target_option.price+"</span></label></li>")
             );
           }
         }
       });
 
-      $(current_target).find("ul:first").slideToggle();
+      if($(current_target).hasClass("slide_toggle")){
+        $(current_target).hide();
+        $(current_target).slideToggle();
+      }
 
       $(current_target).find('input[value='+current_target_option_value+']').attr('checked', 'checked');
-
-
-
     }); //  .not().each()
   }); // .change()
 }); // ready
