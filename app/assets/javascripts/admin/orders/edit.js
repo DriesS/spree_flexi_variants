@@ -13,7 +13,7 @@ $(document).ready(function(){
     return false;
   });
 
-  $("#add_product_name").product_autocomplete();
+  //$("#add_product_name").product_autocomplete();
 
 });
 
