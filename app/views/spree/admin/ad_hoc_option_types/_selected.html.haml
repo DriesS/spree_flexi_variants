@@ -1,0 +1,32 @@
+- content_for :page_actions do
+  %li
+    = button_link_to t("add_option_type"), available_ad_hoc_admin_product_option_types_url(@product), :icon => 'icon-plus', :id => 'admin_new_user_link', :remote => :true
+
+%table.index
+  %colgroup
+    %col{:style => "width: 60%"}
+    %col{:style => "width: 10%"}
+    %col{:style => "width: 10%"}
+    %col{:style => "width: 20%"}
+  %thead
+    %th= t("name")
+    %th= t("presentation")
+    %th= t("required")
+    %th.actions
+  - @option_types.each do |ahot|
+    - if ahot.option_type.id.to_s == @last_selected_option_type_id
+    - # do we need to do the 'first time' forced-edit/save of new option values?
+      = render :partial => "form", :locals => { :f => f }
+      = render :partial => "selected_edit", :locals => { :ahot => ahot }
+    - else
+      %tr
+        %td= ahot.option_type.name
+        %td= ahot.option_type.presentation
+        %td= ahot.is_required
+        %td.actions
+          = link_to_edit ahot, :no_text => true
+          = link_to_delete ahot, :no_text => true
+  - if @option_types.empty?
+    %tr
+      %td{:colspan => "3"}= t(:none)
+#option-types

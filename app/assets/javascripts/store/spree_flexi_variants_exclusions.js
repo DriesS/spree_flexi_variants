@@ -153,16 +153,19 @@ $(document).ready(function() {
 
       var target_options = $(current_target).empty().data('options');
 
+      var name = $(current_target).data("form-name") + "[]";
+
+      $(current_target).append("<label class='error' for="+name+">This field is required.</label>");
+
       $.each(target_options, function(i) {
         var target_option = target_options[i];                  // e.g. s_2_0
 
         if(target_option.value === ""){
           var value = target_option.value;
           var id = $(current_target).attr("id") + '__' + value;
-          var name = $(current_target).data("form-name") + "[]";
 
           $(current_target).append(
-            $("<li><label><input type='radio' class='ad-hoc-option-type' id="+id+" name="+name+" value="+value+"><span class='variant-description'> "+target_option.text+"</span><span class='price diff'> "+target_option.price+"</span></label></li>")
+            $("<li><label><input type='radio' class='ad-hoc-option-type required' id="+id+" name="+name+" value="+value+"><span class='variant-description'> "+target_option.text+"</span><span class='price diff'> "+target_option.price+"</span></label></li>")
           );
         } else {
           if (legalCombination(triggering_select, triggering_value, current_target, target_option)) {
@@ -171,7 +174,7 @@ $(document).ready(function() {
             var target_name = $(current_target).data("form-name") + "[]";
 
             $(current_target).append(
-              $("<li><label><input type='radio' class='ad-hoc-option-type' id="+target_id+" name="+target_name+" value="+target_value+"><span class='variant-description'> "+target_option.text+"</span><span class='price diff'> "+target_option.price+"</span></label></li>")
+              $("<li><label><input type='radio' class='ad-hoc-option-type required' id="+target_id+" name="+target_name+" value="+target_value+"><span class='variant-description'> "+target_option.text+"</span><span class='price diff'> "+target_option.price+"</span></label></li>")
             );
           }
         }

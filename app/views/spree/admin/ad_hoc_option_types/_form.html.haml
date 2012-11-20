@@ -1,0 +1,14 @@
+%h3
+.row
+  .alpha.eight.columns
+    = f.field_container :is_required do
+      = f.label :position, t("position_within_product")
+      = f.number_field :position
+      = f.error_message_on :position
+  .omega.eight.columns
+    = f.field_container :is_required do
+      = f.label :is_required, t("required")
+      %ul
+        %li
+          = f.check_box :is_required
+      = f.error_message_on :is_required

@@ -1,0 +1,30 @@
+= render :partial => 'spree/admin/shared/product_sub_menu'
+= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => "Ad Hoc Variant Exclusions"}
+
+
+- if @product.ad_hoc_option_types.size <= 1
+  %h2= t("ad_hoc_variant_exclusions_unavailable")
+- else
+  - content_for :page_actions do
+    %li
+      = button_link_to t("new_ad_hoc_variant_exclusion"), new_admin_product_ad_hoc_variant_exclusion_url, :icon => 'icon-plus', :remote => true, :id => 'new_ad_hoc_variant_exclusion_link'
+  %fieldset
+    %legend
+      = t("ad_hoc_variant_exclusions")
+    #new_ad_hoc_variant_exclusion
+    %table#listing_ad_hoc_variant_exclusions.index.sortable
+      %thead
+        - sorted_ots = @product.ad_hoc_option_types.sort {|x,y| x.presentation <=> y.presentation}
+        - sorted_ots.each do |ot|
+          %th
+            = t("option_value")
+            for #{t("option_type")} #{ot.presentation}
+      %tbody
+        - @product.ad_hoc_variant_exclusions.each do |excl|
+          %tr{:id => "#{dom_id excl}"}
+          - sorted_ots.each do |ot|
+            - ov = excl.excluded_ad_hoc_option_values.detect { |eov| eov.ad_hoc_option_value.option_type == ot }
+            %td
+              = ov.nil? ? "<all>" : ov.ad_hoc_option_value.name
+          %td.actions
+            = link_to_delete(excl)

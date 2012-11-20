@@ -1,0 +1,5 @@
+- @product.ad_hoc_option_types.each do |ahot|
+  .field
+    %label
+      = "Choose a value for option type: #{ahot.option_type.presentation}"
+    = select_tag "ad_hoc_option_type[#{ahot.id}", options_from_collection_for_select(ahot.ad_hoc_option_values, 'id', 'name'), {:include_blank => 'All Values'}
