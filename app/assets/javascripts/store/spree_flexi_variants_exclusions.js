@@ -123,13 +123,17 @@ function possibleCombinations (options) {
 $(document).ready(function() {
   // initialize all the 'options'
 
+
+
   $('.ad_hoc').each(function(){
+
     var options = [];
     var select = this;
 
     // find the current options, and save them in the 'data' of the select
 
     $(select).find('input').each(function() {
+      this.checked = false;
       var text_value = $(this).siblings('.variant-description').text();
       var price_value = $(this).siblings('.price').text();
       options.push({value: $(this).val(), text: text_value, price: price_value});
@@ -140,7 +144,12 @@ $(document).ready(function() {
 
   // set up the change event handler when any drop down changes,
 
-  $('.ad_hoc input').live('change', function() {
+  $('.ad_hoc input:not(.trigger-change)').live('change', function() {
+    $("#total_price").show();
+    $("#add-to-cart-button").removeAttr("disabled");
+  });
+
+  $('.ad_hoc input.trigger-change').live('change', function() {
     var triggering_value = $(this).val();
     var triggering_select = $(this).parents('.ad_hoc:first');
 
