@@ -10,9 +10,9 @@ module Spree
     has_and_belongs_to_many :product_customization_types
 
 
-    def duplicate_extra(duplicated_object)
-      duplicated_object.ad_hoc_option_types = ad_hoc_option_types.map { |ad_hoc_option_types| ad_hoc_new = ad_hoc_option_types.dup; ad_hoc_new.product_id = id; ad_hoc_new.created_at = ad_hoc_new.updated_at = nil; ad_hoc_new }
-      duplicated_object.ad_hoc_variant_exclusions = ad_hoc_variant_exclusions.map { |exclusion| exclusion_new = exclusion.dup; exclusion_new.product_id = id; exclusion_new.created_at = exclusion_new.updated_at = nil; exclusion_new }
+    def duplicate_extra(original_product)
+      ad_hoc_option_types = original_product.ad_hoc_option_types.map { |ad_hoc_option_types| ad_hoc_new = ad_hoc_option_types.dup; ad_hoc_new.product_id = id; ad_hoc_new.created_at = ad_hoc_new.updated_at = nil; ad_hoc_new }
+      ad_hoc_variant_exclusions = original_product.ad_hoc_variant_exclusions.map { |exclusion| exclusion_new = exclusion.dup; exclusion_new.product_id = id; exclusion_new.created_at = exclusion_new.updated_at = nil; exclusion_new }
     end
 
     private
