@@ -15,6 +15,8 @@ module Spree
 
       self.is_clone = true
 
+      self.available_on = nil
+
       self.ad_hoc_option_types = original_product.ad_hoc_option_types.map do |ad_hoc_option_type|
         ad_hoc_new = ad_hoc_option_type.dup
         ad_hoc_new.product_id = id
