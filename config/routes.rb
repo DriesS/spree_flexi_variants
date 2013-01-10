@@ -33,7 +33,7 @@ Spree::Core::Engine.routes.prepend do
       end
     end
 
-    resources :ad_hoc_variant_exclusions
+    resources :ad_hoc_variant_exclusions, :ad_hoc_option_values
 
     resources :products do
       resources :option_types do
