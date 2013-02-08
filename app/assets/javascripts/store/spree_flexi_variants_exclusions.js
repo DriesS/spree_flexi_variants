@@ -150,6 +150,7 @@ $(document).ready(function() {
   });
 
   $('.ad_hoc input.trigger-change').live('change', function() {
+
     var triggering_value = $(this).val();
     var triggering_select = $(this).parents('.ad_hoc:first');
 
@@ -158,13 +159,15 @@ $(document).ready(function() {
 
       var current_target = this;
 
+
       var current_target_option_value = $(current_target).find("input[type='radio']:checked").val();
 
       var target_options = $(current_target).empty().data('options');
 
       var name = $(current_target).data("form-name") + "[]";
 
-      $(current_target).append("<label class='error' for="+name+">This field is required.</label>");
+      //$(current_target).append("<label class='error' for="+name+">This field is required.</label>");
+
 
       $.each(target_options, function(i) {
         var target_option = target_options[i];                  // e.g. s_2_0
