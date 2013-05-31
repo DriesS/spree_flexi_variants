@@ -19,5 +19,9 @@ module Spree
     delegate :name, :to => :option_value
     delegate :presentation, :to => :option_value
 
+    def price_modifier
+      read_attribute(:price_modifier) ? read_attribute(:price_modifier) : self.option_value.price_modifier
+    end
+
   end
 end

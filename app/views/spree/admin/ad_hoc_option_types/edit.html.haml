@@ -12,7 +12,8 @@
         %tr
           %th= t("name")
           %th= t("display")
-          %th= t("price_modifier")
+          %th= t("official_price")
+          %th= t("overwriten_price")
           %th.actions
       %tbody#option_values
         = f.fields_for :ad_hoc_option_values do |option_value_form|
