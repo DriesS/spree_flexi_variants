@@ -3,5 +3,5 @@
   <td class='presentation'><span>  <%= f.object.option_value.presentation %> </span></td>
   <td class='original_price'><%= f.object.option_value.price_modifier %></td>
   <td class='price_modifier'><%= f.text_field :price_modifier %></td>
-  <td class="actions"><%= link_to_remove_fields t("remove"), f%></td>
+  <td class="actions"><%= link_to_remove_fields t("remove"), f, :no_text => true %></td>
 </tr>

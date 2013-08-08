@@ -20,8 +20,8 @@ module Spree
     end
 
     # TODO how is this different than the default 'destroy'.  maybe I don't need this method
-    def remove
-      @product=@ad_hoc_variant_exclusion.product
+    def destroy
+      @product = @ad_hoc_variant_exclusion.product
       @ad_hoc_variant_exclusion.destroy
       flash.notice = I18n.t("notice_messages.ad_hoc_variant_exclusion_removed")
       redirect_to admin_product_ad_hoc_variant_exclusions_url(@product)

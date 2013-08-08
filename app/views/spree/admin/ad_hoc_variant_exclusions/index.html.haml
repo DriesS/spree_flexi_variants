@@ -27,4 +27,4 @@
             %td
               = ov.nil? ? "<all>" : ov.ad_hoc_option_value.name
           %td.actions
-            = link_to_delete(excl)
+            = link_to("Delete", admin_ad_hoc_variant_exclusion_path(excl), :method => :delete, :class => 'action') 
