@@ -144,12 +144,12 @@ $(document).ready(function() {
 
   // set up the change event handler when any drop down changes,
 
-  $('.ad_hoc input:not(.trigger-change)').live('change', function() {
+  $(document).on('click', 'input.ad-hoc-option-type:not(.trigger-change)', function() {
     $("#total_price").show();
     $("#add-to-cart-button").removeAttr("disabled");
   });
 
-  $('.ad_hoc input.trigger-change').live('change', function() {
+  $('.ad_hoc input.trigger-change').on('change', function() {
 
     var triggering_value = $(this).val();
     var triggering_select = $(this).parents('.ad_hoc:first');
