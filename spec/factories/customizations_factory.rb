@@ -59,12 +59,12 @@ Factory.define :engraving_customization, :parent => :product_customization do |f
   f.customized_product_options { [ Factory(:customized_inscription) ]}
 end
 
-#Factory.define :product_with_engraving, :parent => :product do |f|
-#  cust = Factory(:engraving_customization_type)
-#  f.product_customization_types [cust]
+Factory.define :product_with_engraving, :parent => :product do |f|
+ cust = Factory(:engraving_customization_type)
+ f.product_customization_types [cust]
 
-#  f.after_create do |product|
-#    cust.products << product
-#  end
-#end
+ f.after_create do |product|
+   cust.products << product
+ end
+end
 
