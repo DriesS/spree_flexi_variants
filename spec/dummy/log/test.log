@@ -1,0 +1,9 @@
+Connecting to database specified by database.yml
+  [1m[36mSpree::Preference Load (3.8ms)[0m  [1mSELECT "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = 'spree/app_configuration/override_actionmailer_config' LIMIT 1[0m
+  [1m[35mSpree::MailMethod Load (0.2ms)[0m  SELECT "spree_mail_methods".* FROM "spree_mail_methods" WHERE "spree_mail_methods"."environment" = 'test' LIMIT 1
+  [1m[36mSpree::Preference Load (0.2ms)[0m  [1mSELECT "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = 'spree/app_configuration/use_s3' LIMIT 1[0m
+  [1m[35mSpree::Preference Load (0.3ms)[0m  SELECT "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = 'spree/app_configuration/attachment_styles' LIMIT 1
+  [1m[36mSpree::Preference Load (0.3ms)[0m  [1mSELECT "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = 'spree/app_configuration/attachment_path' LIMIT 1[0m
+  [1m[35mSpree::Preference Load (0.3ms)[0m  SELECT "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = 'spree/app_configuration/attachment_url' LIMIT 1
+  [1m[36mSpree::Preference Load (0.2ms)[0m  [1mSELECT "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = 'spree/app_configuration/attachment_default_url' LIMIT 1[0m
+  [1m[35mSpree::Preference Load (0.3ms)[0m  SELECT "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = 'spree/app_configuration/attachment_default_style' LIMIT 1
